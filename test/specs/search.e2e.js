@@ -10,14 +10,10 @@ ocupcional: 'ocupational'
 
 describe('Terapeutica - SearchPage', () => {
 
-    before(async ()=> {
+    beforeEach(async ()=> {
         await searchPage.open();
     })
     
-    beforeEach(async ()=> {
-        await searchPage.refreshPage();
-    })
-
     it('Should show Phisical in the browser', async () => {
         await searchPage.clickFisica();
         await expect(browser).toHaveUrlContaining(field.fisica);
@@ -31,6 +27,12 @@ describe('Terapeutica - SearchPage', () => {
     it('Should show Ocupational in the browser', async () => {
         await searchPage.clickOcupacional();
         await expect(browser).toHaveUrlContaining(field.ocupcional);
+    });
+
+    it('Should not show results when "Wendy" is searched', async () => {
+        await searchPage.digitarBusqueda('Wendy');
+        await searchPage.clickBuscar();
+        await expect(await searchPage.getNoHayResultados).toBeDisplayed();
     });
 
     it('Should show Maria when "Maria" is searched', async () => {

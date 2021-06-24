@@ -18,6 +18,11 @@ class SearchPage {
             return $('//*[text()="Licda. María Miranda Vargas"]')
          }
 
+         get getNoHayResultados () 
+         {
+            return $('//*[text()="No hay resultados para mostrar."]')
+         }
+
          get mapShowing () 
          {
              return $('.col-lg-5')
